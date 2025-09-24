@@ -1,0 +1,49 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pizza Topping Randomizer</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        h1 { color: #d35400; }
+        button { padding: 10px 20px; font-size: 16px; }
+        ul { list-style-type: none; padding: 0; }
+        li { margin: 5px 0; }
+    </style>
+</head>
+<body>
+    <h1>🍕 Pizza Topping Randomizer</h1>
+    <p>Click the button to generate a random pizza topping combination.</p>
+    <button onclick="randomizeToppings()">Randomize Toppings</button>
+    <h2>Selected Toppings:</h2>
+    <ul id="toppingList"></ul>
+
+    <script>
+        const toppings = ["Mushrooms", "Broccoli", "Tomatoes", "Pepperoni", "Onions", "Olives"];
+
+        function randomizeToppings() {
+            const toppingList = document.getElementById("toppingList");
+            toppingList.innerHTML = "";
+
+            const totalToppings = Math.floor(Math.random() * 3) + 3; // 3 to 5 toppings
+            let selected = [];
+
+            while (selected.length < totalToppings) {
+                const topping = toppings[Math.floor(Math.random() * toppings.length)];
+                const count = Math.floor(Math.random() * 4); // 0 to 3 times
+
+                if (count > 0) {
+                    selected.push({ name: topping, count: count });
+                }
+            }
+
+            selected.forEach(item => {
+                const li = document.createElement("li");
+                li.textContent = `${item.name} × ${item.count}`;
+                toppingList.appendChild(li);
+            });
+        }
+    </script>
+</body>
+</html>
